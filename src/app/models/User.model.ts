@@ -1,11 +1,11 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 
-export interface IMessage extends Document {
+export interface Message extends Document {
     content: string;
     createdAt: Date;
 }
 
-const MessageSchema: Schema<IMessage> = new Schema({
+const MessageSchema: Schema<Message> = new Schema({
     content: {
         type: String,
         required: true,
@@ -17,9 +17,9 @@ const MessageSchema: Schema<IMessage> = new Schema({
     }
 });
 
-const MessageModel = mongoose.model<IMessage>("MessageModel", MessageSchema);
+const MessageModel = mongoose.model<Message>("MessageModel", MessageSchema);
 
-export interface IUser extends Document {
+export interface User extends Document {
     username: string;
     email: string;
     password: string;
@@ -27,10 +27,10 @@ export interface IUser extends Document {
     verifyCodeExpiry: Date;
     isVerified: boolean;
     isAcceptingMsg: boolean;
-    messages: mongoose.Types.ObjectId[]; // Reference to MessageModel
+    messages: mongoose.Types.ObjectId[]; 
 }
 
-const UserSchema: Schema<IUser> = new Schema({
+const UserSchema: Schema<User> = new Schema({
     username: {
         type: String,
         required: [true, "Username is required"],
@@ -68,6 +68,6 @@ const UserSchema: Schema<IUser> = new Schema({
     }]
 });
 
-const UserModel: Model<IUser> = mongoose.model<IUser>("UserModel", UserSchema);
+const UserModel: Model<User> = mongoose.model<User>("UserModel", UserSchema);
 
 export { UserModel, MessageModel };
